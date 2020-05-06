@@ -1,6 +1,7 @@
 package com.example.recyclerview;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,8 @@ public class ProgrammingAdapter extends RecyclerView.Adapter<ProgrammingAdapter.
 
     @NonNull
     @Override
-    public ProgramingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProgramingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {//execution order 2
+        Log.d("MyTag", "onCreateViewHolder: ");
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
         View view=inflater.inflate(R.layout.list_item_layout,parent,false);
 
@@ -32,14 +34,16 @@ public class ProgrammingAdapter extends RecyclerView.Adapter<ProgrammingAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProgramingViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProgramingViewHolder holder, int position) {//execution order 4
+        Log.d("MyTag", "onBindViewHolder: ");
         String title=data.get(position);
         holder.textView.setText(title);
 
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount() {//execution order 1
+        Log.d("MyTag", "getItemCount: ");
 
         return data.size();
     }
@@ -47,8 +51,9 @@ public class ProgrammingAdapter extends RecyclerView.Adapter<ProgrammingAdapter.
     protected class ProgramingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener , View.OnLongClickListener {
         ImageView imageView;
         TextView textView;
-        public ProgramingViewHolder(@NonNull View itemView) {
+        public ProgramingViewHolder(@NonNull View itemView) {//execution order 3
             super(itemView);
+            Log.d("MyTag", "ProgramingViewHolder: ");
             imageView=itemView.findViewById(R.id.imageView);
             textView=itemView.findViewById(R.id.textView);
             itemView.setOnClickListener(this);
